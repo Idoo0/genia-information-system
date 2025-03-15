@@ -113,9 +113,9 @@
             <img src="{{ asset("images/image 1.png") }}" class="w-60">
         </div>   
     </div>
-    <div class="w-screen">
+    <!-- <div class="w-screen">
         <img src="{{ asset("images/f.png") }}" class="w-screen">
-    </div>
+    </div> -->
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script>

@@ -90,14 +90,66 @@
         @yield('content')
     </main>
 
-    <!-- <footer class="bg-[#f5f8f9]">
-        <div class="max-w-full w-full mx-auto p-4 md:flex md:items-center md:justify-between border-t-2 border-gray-300"
-            style="margin-top: 50px; margin-bottom: 0;">
-            <span class="text-sm sm:text-center">
-                Copyright © 2025 UKM Genia
-            </span>
+    <footer class="w-screen h-[550px] bg-[#001D3D] flex flex-col text-white">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 gap-12 items-start mt-10">
+            <!-- Grid 1: Logo Section -->
+            <div>
+                <img src="{{ asset('images/genia-white.png') }}" alt="UKM Genia Logo" class="h-16 w-auto">
+            </div>
+
+            <!-- Grid 2: Right Section (Address + Social Media) -->
+            <div class="grid grid-cols-2 gap-8">
+                <!-- Grid 2.1: Address Section -->
+                <div>
+                    <p>Universitas Sam Ratulangi, Manado</p>
+                    <p class="mt-6">
+                        Kelurahan Bahu, Kecamatan Malalayang <br> 
+                        Kota Manado, Sulawesi Utara 95115
+                    </p>
+                    <p class="mt-6">
+                        Email: <a href="mailto:ukmgenia@unsrat.ac.id" class="underline">ukmgenia@unsrat.ac.id</a>
+                    </p>
+                </div>
+
+                <!-- Grid 2.2: Social Media Section -->
+                <div class="flex flex-col space-y-3">
+                   <div> 
+                        <a href="#" class="flex items-center space-x-3 bg-gray-700 rounded-full px-4 py-2">
+                            <img src="{{ asset('images/fbg.png') }}" alt="Facebook" class="h-6 w-6">
+                            <span>Follow us on Facebook</span>
+                        </a>
+                    </div>
+                    <div class="mt-10">
+                        <a href="#" class="flex items-center space-x-3 bg-gray-700 rounded-full px-4 py-2">
+                            <img src="{{ asset('images/igg.png') }}" alt="Instagram" class="h-6 w-6">
+                            <span>Follow us on Instagram</span>
+                        </a>
+                    </div>
+                    <div class="mt-10">
+                        <a href="#" class="flex items-center space-x-3 bg-gray-700 rounded-full px-4 py-2">
+                            <img src="{{ asset('images/lig.png') }}" alt="LinkedIn" class="h-6 w-6">
+                            <span>Follow us on LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </footer> -->
+
+         <!-- Second Row -->
+    <div class="flex-grow grid grid-cols-2 gap-8">
+        <!-- Grid 3: Picture -->
+        <div class="h-full">
+            <img src="{{ asset('images/Lines.png') }}" alt="Footer Image" class="h-full w-full object-cover">
+        </div>
+
+        <!-- Grid 4: Copyright -->
+        <div class="flex justify-end items-end pb-4 mr-10">
+            <p>&copy; 2025 UKM Genia.</p>
+        </div>
+    </div>
+
+    </footer>
 
 </body>
 
