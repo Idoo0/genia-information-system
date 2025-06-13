@@ -19,7 +19,7 @@
     </div>
 
     <!-- Search and Filter -->
-    <div class="mb-6">
+    <!-- <div class="mb-6">
       <form method="GET" action="" class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch">
       <div class="flex-grow">
         <input type="text" name="search" placeholder="Search competitions..." value="{{ request('search') }}"
@@ -51,7 +51,7 @@
         Filter
       </button>
       </form>
-    </div>
+    </div> -->
 
     <!-- Competitions Table -->
     <div class="overflow-x-auto border border-gray-200 rounded-lg">
