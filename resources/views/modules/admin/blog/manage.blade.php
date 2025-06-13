@@ -56,7 +56,7 @@
                                         <div class="hidden md:block flex-shrink-0 h-12 w-16">
                                             <img
                                                 class="h-12 w-16 rounded-md object-cover"
-                                                src="{{ Storage::url($blog->thumbnail) }}"
+                                                src="{{ asset($blog->thumbnail) }}"
                                                 alt="Thumbnail {{ $blog->title }}"
                                             >
                                         </div>
