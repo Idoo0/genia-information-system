@@ -65,27 +65,19 @@
             <div class="bg-white border border-gray-200 rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activities</h3>
                 <div class="space-y-4">
-                    <div class="flex items-start">
-                        <div class="h-2 w-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
-                        <div>
-                            <p class="text-gray-600">Published "GELATIK 2025" competition</p>
-                            <span class="text-sm text-gray-500">2 hours ago</span>
+                    @forelse($recentActivities as $activity)
+                        <div class="flex items-start">
+                            <div class="h-2 w-2 bg-{{ $activity['color'] }}-500 rounded-full mt-2 mr-3"></div>
+                            <div>
+                                <p class="text-gray-600">{{ Str::limit($activity['message'], 60) }}</p>
+                                <span class="text-sm text-gray-500">{{ $activity['time']->diffForHumans() }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="h-2 w-2 bg-orange-500 rounded-full mt-2 mr-3"></div>
-                        <div>
-                            <p class="text-gray-600">Updated blog post "Journey to Medalist"</p>
-                            <span class="text-sm text-gray-500">5 hours ago</span>
+                    @empty
+                        <div class="text-gray-500 text-center py-4">
+                            No recent activities found.
                         </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="h-2 w-2 bg-gray-500 rounded-full mt-2 mr-3"></div>
-                        <div>
-                            <p class="text-gray-600">Added news article "GELATIK 2025 Finalist Announcement"</p>
-                            <span class="text-sm text-gray-500">Yesterday</span>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
 

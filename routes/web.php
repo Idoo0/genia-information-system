@@ -64,8 +64,38 @@ Route::prefix('admin')->name('admin.')->group(function () {
             $totalCompetitions = \App\Models\Competition::count();
             $activeBlogPosts = \App\Models\Blog::count();
             $latestNews = \App\Models\News::count();
-            
-            return view('modules.admin.index', compact('totalCompetitions', 'activeBlogPosts', 'latestNews'));
+            // Get recent activities - 1 of each
+            $recentActivities = collect();
+            // Latest competition
+            $latestCompetition = \App\Models\Competition::latest('created_at')->first();
+            if ($latestCompetition) {
+                $recentActivities->push([
+                    'message' => 'Published "' . $latestCompetition->name . '" competition',
+                    'time' => $latestCompetition->created_at,
+                    'color' => 'blue'
+                ]);
+            }
+            // Latest blog post
+            $latestBlog = \App\Models\Blog::latest('updated_at')->first();
+            if ($latestBlog) {
+                $recentActivities->push([
+                    'message' => 'Updated blog post "' . $latestBlog->title . '"',
+                    'time' => $latestBlog->updated_at,
+                    'color' => 'orange'
+                ]);
+            }
+            // Latest news
+            $latestNews = \App\Models\News::latest('created_at')->first();
+            if ($latestNews) {
+                $recentActivities->push([
+                    'message' => 'Added news article "' . $latestNews->title . '"',
+                    'time' => $latestNews->created_at,
+                    'color' => 'gray'
+                ]);
+            }
+            // Sort by time (most recent first)
+            $recentActivities = $recentActivities->sortByDesc('time');
+            return view('modules.admin.index', compact('totalCompetitions', 'activeBlogPosts', 'latestNews', 'recentActivities'));
         })->name('dashboard');
 
         // Competition
