@@ -63,9 +63,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', function () {
             $totalCompetitions = \App\Models\Competition::count();
             $activeBlogPosts = \App\Models\Blog::count();
-            $latestNews = \App\Models\News::count();
+            $latestNews = \App\Models\News::count(); // Keep this for the count
+            
             // Get recent activities - 1 of each
             $recentActivities = collect();
+            
             // Latest competition
             $latestCompetition = \App\Models\Competition::latest('created_at')->first();
             if ($latestCompetition) {
@@ -75,6 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                     'color' => 'blue'
                 ]);
             }
+            
             // Latest blog post
             $latestBlog = \App\Models\Blog::latest('updated_at')->first();
             if ($latestBlog) {
@@ -84,17 +87,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
                     'color' => 'orange'
                 ]);
             }
-            // Latest news
-            $latestNews = \App\Models\News::latest('created_at')->first();
-            if ($latestNews) {
+            
+            // Latest news (use different variable name)
+            $latestNewsItem = \App\Models\News::latest('created_at')->first();
+            if ($latestNewsItem) {
                 $recentActivities->push([
-                    'message' => 'Added news article "' . $latestNews->title . '"',
-                    'time' => $latestNews->created_at,
+                    'message' => 'Added news article "' . $latestNewsItem->title . '"',
+                    'time' => $latestNewsItem->created_at,
                     'color' => 'gray'
                 ]);
             }
+            
             // Sort by time (most recent first)
             $recentActivities = $recentActivities->sortByDesc('time');
+            
             return view('modules.admin.index', compact('totalCompetitions', 'activeBlogPosts', 'latestNews', 'recentActivities'));
         })->name('dashboard');
 
