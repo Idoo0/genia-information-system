@@ -17,7 +17,7 @@
     <!-- Featured Image -->
     @if($newsItem->thumbnail)
     <div class="mb-8">
-        <img src="{{ asset($newsItem->thumbnail) }}" 
+        <img src="{{ Storage::url($newsItem->thumbnail) }}" 
              alt="{{ $newsItem->title }}" 
              class="w-full h-auto rounded-lg shadow-md">
     </div>

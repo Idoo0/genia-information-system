@@ -40,7 +40,7 @@
                         <a href="{{ route('news.show', $item->slug) }}" class="bg-white rounded-[20px] shadow-lg p-8 hover:shadow-xl transition-shadow">
                             <div class="flex flex-col items-center text-center">
                                 @if($item->thumbnail)
-                                    <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" class="h-16 w-auto mb-6 object-cover rounded-md">
+                                    <img src="{{ Storage::url($item->thumbnail) }}" alt="{{ $item->title }}" class="h-16 w-auto mb-6 object-cover rounded-md">
                                 @endif
                                 <h3 class="text-xl font-medium">{{ $item->title }}</h3>
                                 <p class="text-sm text-gray-500 mt-2">{{ $item->publish_date->format('F j, Y') }}</p>
