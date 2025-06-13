@@ -1,8 +1,14 @@
 @extends('layouts.admin')
 
 @section('admin-content')
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
 <div class="container mx-auto px-4 py-6">
     <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+        <!-- Flash Messages -->
+        <div id="flash-message" class="mb-4 hidden p-4 rounded-md"></div>
+
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4 sm:mb-0">
@@ -16,7 +22,7 @@
             </a>
         </div>
 
-        <!-- Filters -->
+        <!-- Filters (Commented Out) -->
         <!-- <form id="filter-form" class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
                 <label for="level-filter" class="block text-sm font-medium text-gray-700 mb-1">Competition Level</label>
@@ -27,7 +33,6 @@
                     <option value="National" {{ request('level') == 'National' ? 'selected' : '' }}>National</option>
                 </select>
             </div>
-
             <div>
                 <label for="competition-filter" class="block text-sm font-medium text-gray-700 mb-1">Competition</label>
                 <select id="competition-filter" name="competition" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -38,7 +43,6 @@
                     <option value="COMPFEST" {{ request('competition') == 'COMPFEST' ? 'selected' : '' }}>COMPFEST</option>
                 </select>
             </div>
-
             <div>
                 <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                 <input type="text" id="search" name="search" value="{{ request('search') }}" placeholder="Search news..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -76,7 +80,7 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($news as $item)
-                        <tr data-news-id="{{ $item->id }}">
+                        <tr data-news-slug="{{ $item->slug }}">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
@@ -103,7 +107,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('admin.news.edit', $item->slug) }}" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                <button data-news-id="{{ $item->id }}" onclick="deleteNews('{{ $item->id }}')" class="text-red-600 hover:text-red-900">Delete</button>
+                                <button data-news-slug="{{ $item->slug }}" onclick="deleteNews('{{ $item->slug }}')" class="text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
                         @endforeach
@@ -138,10 +142,10 @@
 </div>
 
 <script>
-let newsIdToDelete = null;
+let newsSlugToDelete = null;
 
-function deleteNews(id) {
-    newsIdToDelete = id;
+function deleteNews(slug) {
+    newsSlugToDelete = slug;
     document.getElementById('deleteModal').classList.remove('hidden');
     document.getElementById('deleteModal').classList.add('flex');
 }
@@ -149,21 +153,27 @@ function deleteNews(id) {
 function closeDeleteModal() {
     document.getElementById('deleteModal').classList.add('hidden');
     document.getElementById('deleteModal').classList.remove('flex');
-    newsIdToDelete = null;
+    newsSlugToDelete = null;
 }
 
 function confirmDelete() {
-    if (newsIdToDelete) {
-        fetch(`/admin/news/${newsIdToDelete}`, {
+    if (newsSlugToDelete) {
+        fetch(`/admin/news/${newsSlugToDelete}`, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json'
             }
-        }).then(response => {
-            if (response.ok) {
-                const row = document.querySelector(`tr[data-news-id="${newsIdToDelete}"]`);
+        })
+        .then(response => response.json())
+        .then(data => {
+            const flash = document.getElementById('flash-message');
+            flash.classList.remove('hidden');
+            flash.textContent = data.message;
+
+            if (data.success) {
+                flash.classList.add('bg-green-100', 'text-green-700');
+                const row = document.querySelector(`tr[data-news-slug="${newsSlugToDelete}"]`);
                 if (row) {
                     row.remove();
                 }
@@ -171,42 +181,34 @@ function confirmDelete() {
                 if (tbody && tbody.children.length === 0) {
                     window.location.reload();
                 }
-                alert('News deleted successfully');
             } else {
-                response.json().then(data => {
-                    alert(data.message || 'Failed to delete news. Please try again.');
-                });
+                flash.classList.add('bg-red-100', 'text-red-700');
             }
-        }).catch(error => {
+
+            setTimeout(() => {
+                flash.classList.add('hidden');
+                flash.textContent = '';
+            }, 3000);
+        })
+        .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while deleting the news. Please try again.');
-        }).finally(() => {
+            const flash = document.getElementById('flash-message');
+            flash.classList.remove('hidden');
+            flash.classList.add('bg-red-100', 'text-red-700');
+            flash.textContent = 'An error occurred while deleting the news';
+            setTimeout(() => {
+                flash.classList.add('hidden');
+                flash.textContent = '';
+            }, 3000);
+        })
+        .finally(() => {
             closeDeleteModal();
         });
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('button[onclick^="deleteNews"]').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const newsId = this.getAttribute('data-news-id');
-            if (newsId) {
-                deleteNews(newsId);
-            }
-        });
-    });
-
     document.getElementById('confirmDelete').addEventListener('click', confirmDelete);
-
-    // Filter functionality
-    const filterForm = document.getElementById('filter-form');
-    const inputs = filterForm.querySelectorAll('select, input');
-    inputs.forEach(input => {
-        input.addEventListener('change', () => {
-            filterForm.submit();
-        });
-    });
 });
 </script>
 @endsection

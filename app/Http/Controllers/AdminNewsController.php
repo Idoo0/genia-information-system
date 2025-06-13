@@ -96,7 +96,8 @@ class AdminNewsController extends Controller
     }
 
     public function destroy(News $news)
-    {
+{
+    try {
         if ($news->thumbnail && Storage::disk('public')->exists($news->thumbnail)) {
             Storage::disk('public')->delete($news->thumbnail);
         }
@@ -107,5 +108,12 @@ class AdminNewsController extends Controller
             'success' => true,
             'message' => 'News deleted successfully'
         ]);
+    } catch (\Exception $e) {
+        \Log::error('News Deletion Failed', ['error' => $e->getMessage(), 'slug' => $news->slug]);
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to delete news: ' . $e->getMessage()
+        ], 500);
     }
+}
 }
