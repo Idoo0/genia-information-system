@@ -24,19 +24,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="bg-blue-50 p-4 rounded-lg">
                 <h3 class="text-lg font-medium text-blue-800">Total Competitions</h3>
-                <p class="text-3xl font-bold text-blue-600 mt-2">24</p>
+                <p class="text-3xl font-bold text-blue-600 mt-2">{{ $totalCompetitions }}</p>
             </div>
             
             <div class="bg-orange-50 p-4 rounded-lg">
                 <h3 class="text-lg font-medium text-orange-800">Active Blog Posts</h3>
-                <p class="text-3xl font-bold text-orange-600 mt-2">56</p>
+                <p class="text-3xl font-bold text-orange-600 mt-2">{{ $activeBlogPosts }}</p>
             </div>
             
             <div class="bg-gray-50 p-4 rounded-lg">
                 <h3 class="text-lg font-medium text-gray-800">Latest News</h3>
-                <p class="text-3xl font-bold text-gray-600 mt-2">12</p>
+                <p class="text-3xl font-bold text-gray-600 mt-2">{{ $latestNews }}</p>
             </div>
         </div>
+
 
         <!-- Content Section -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">

@@ -61,7 +61,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         // Dashboard
         Route::get('/dashboard', function () {
-            return view('modules.admin.index');
+            $totalCompetitions = \App\Models\Competition::count();
+            $activeBlogPosts = \App\Models\Blog::count();
+            $latestNews = \App\Models\News::count();
+            
+            return view('modules.admin.index', compact('totalCompetitions', 'activeBlogPosts', 'latestNews'));
         })->name('dashboard');
 
         // Competition
