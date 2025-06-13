@@ -17,7 +17,7 @@
         </div>
 
         <!-- Filters -->
-        <form id="filter-form" class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- <form id="filter-form" class="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
                 <label for="level-filter" class="block text-sm font-medium text-gray-700 mb-1">Competition Level</label>
                 <select id="level-filter" name="level" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
@@ -43,7 +43,7 @@
                 <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                 <input type="text" id="search" name="search" value="{{ request('search') }}" placeholder="Search news..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
             </div>
-        </form>
+        </form> -->
 
         <!-- News Table -->
         <div class="overflow-x-auto">
@@ -80,7 +80,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
-                                        <img class="h-10 w-10 rounded-md object-cover" src="{{ asset($item->thumbnail ?? 'images/placeholder.png') }}" alt="">
+                                        <img class="h-10 w-10 rounded-md object-cover" src="{{ Storage::url($item->thumbnail ?? 'images/placeholder.png') }}" alt="">
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900">{{ $item->title }}</div>
