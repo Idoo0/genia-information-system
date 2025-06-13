@@ -419,7 +419,7 @@
 
                 <div class="grid gap-y-6 sm:gap-y-8">
                     <!-- Blog Card 1 -->
-                    <a href="#" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
+                    <a href="details_blog/bagaimana-bisa-antropometri-bisa-jadi-desain-fasilitas-publik" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
                         <img src="{{ asset('images/preview-blog-1.png') }}" class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-lg object-cover" alt="Blog Image">
                         <div>
                             <h3 class="text-md sm:text-lg font-semibold text-gray-900">
@@ -435,7 +435,7 @@
                     </a>
 
                     <!-- Blog Card 2 -->
-                    <a href="#" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
+                    <a href="details_blog/ceplusplus-kami-masuk-10-besar" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
                         <img src="{{ asset('images/preview-blog-2.png') }}" class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-lg object-cover" alt="Blog Image">
                         <div>
                             <h3 class="text-md sm:text-lg font-semibold text-gray-900">
@@ -451,7 +451,7 @@
                     </a>
 
                     <!-- Blog Card 3 -->
-                    <a href="#" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
+                    <a href="details_blog/bantu-lansia-dengan-aplikasi-monitoring-kami" class="flex items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-gray-100 transition">
                         <img src="{{ asset('images/preview-blog-3.png') }}" class="w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-lg object-cover" alt="Blog Image">
                         <div>
                             <h3 class="text-md sm:text-lg font-semibold text-gray-900">
@@ -459,7 +459,7 @@
                             </h3>
                             <div class="flex items-center text-gray-600 text-xs sm:text-sm mt-2">
                                 <img src="{{ asset('images/blog-author.svg') }}" class="w-5 h-5 sm:w-6 sm:h-6 rounded-full mr-2" alt="Author Image">
-                                <span>Galnoel Rindengan</span>
+                                <span>Triadi M</span>
                                 <span class="mx-2">•</span>
                                 <span>5 min read</span>
                             </div>

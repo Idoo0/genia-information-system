@@ -30,7 +30,7 @@
         <!-- Featured Image -->
         @if($blog->thumbnail)
             <div class="mb-8">
-                <img src="{{ asset($blog->thumbnail) }}" alt="{{ $blog->title }}" class="w-full h-auto rounded-lg shadow-md">
+                <img src="{{ Storage::url($blog->thumbnail) }}" alt="{{ $blog->title }}" class="w-full h-auto rounded-lg shadow-md">
             </div>
         @endif
 

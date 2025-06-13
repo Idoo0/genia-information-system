@@ -14,7 +14,7 @@
             <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-12">
                 <div class="md:flex">
                     <div class="md:w-1/2">
-                        <img src="{{ asset($featuredBlog->thumbnail) }}" alt="{{ $featuredBlog->title }}"
+                        <img src="{{ Storage::url($featuredBlog->thumbnail) }}" alt="{{ $featuredBlog->title }}"
                             class="w-full h-full object-cover">
                     </div>
                     <div class="md:w-1/2 p-8">
@@ -57,7 +57,7 @@
             @forelse($blogs as $blog)
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
-                    <img src="{{ asset($blog->thumbnail) }}" alt="{{ $blog->title }}" class="w-full h-48 object-cover">
+                    <img src="{{ Storage::url($blog->thumbnail) }}" alt="{{ $blog->title }}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center mb-2">
                             <span
